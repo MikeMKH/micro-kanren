@@ -1,0 +1,9 @@
+#lang racket
+
+(require (except-in rackunit fail))
+(require rackunit/text-ui)
+
+(run-tests
+ (test-suite "chapter 10"
+  (test-equal? "6" (cdr `(,z . a)) 'a)
+ ))
