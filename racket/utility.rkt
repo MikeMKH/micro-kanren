@@ -1,5 +1,7 @@
 #lang racket
 
+; code from http://webyrd.net/scheme-2013/papers/HemannMuKanren2013.pdf
+
 (require "microkanren.rkt")
 
 ; 5.1
