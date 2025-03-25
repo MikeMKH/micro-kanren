@@ -4,6 +4,16 @@
 
 (require "microkanren.rkt")
 
+(provide
+ Zzz
+ conj+ disj+
+ conde fresh
+ pull take-all take
+ mK-reify reify-state/1st-var reify-s
+ walk*
+ call/empty-state
+ run run*)
+
 ; 5.1
 (define-syntax Zzz
   (syntax-rules ()
