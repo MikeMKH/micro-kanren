@@ -16,12 +16,10 @@
 (require (except-in rackunit fail))
 (require rackunit/text-ui)
 
-;;; I am not sure if the run* actual works
-
 (run-tests
  (test-suite "examples"
   (test-equal? "appendo x y '(1 2 3 4 5)"
-    (run* (q) (fresh (x y) (== `(,x ,y) q) (appendo x y '())))
+    (run* (q) (fresh (x y) (== `(,x ,y) q) (appendo x y '(1 2 3 4 5))))
       '((() (1 2 3 4 5))
         ((1) (2 3 4 5))
         ((1 2) (3 4 5))
