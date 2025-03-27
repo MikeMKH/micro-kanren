@@ -18,12 +18,46 @@
 
 (run-tests
  (test-suite "examples"
-  (test-equal? "appendo x y '(1 2 3 4 5)"
+  (test-equal? "run* appendo x y '(1 2 3 4 5)"
     (run* (q) (fresh (x y) (== `(,x ,y) q) (appendo x y '(1 2 3 4 5))))
       '((() (1 2 3 4 5))
         ((1) (2 3 4 5))
         ((1 2) (3 4 5))
         ((1 2 3) (4 5))
         ((1 2 3 4) (5))
-        ((1 2 3 4 5) ())))
+        ((1 2 3 4 5) ()))
+  )
+  (test-equal? "run* appendo x '() '(1 2 3)"
+    (run* (x) (appendo x '() '(1 2 3)))
+      '((1 2 3))
+  )
+  (test-equal? "run* appendo '() y '(4 5 6)"
+    (run* (y) (appendo '() y '(4 5 6)))
+      '((4 5 6))
+  )
+  (test-equal? "run* appendo '(1 2) '(3 4) z"
+    (run* (z) (appendo '(1 2) '(3 4) z))
+      '((1 2 3 4))
+  )
+  (test-equal? "run 2 appendo x y '(1 2 3 4 5)"
+    (run 2 (q) (fresh (x y) (== `(,x ,y) q) (appendo x y '(1 2 3 4 5))))
+      '((() (1 2 3 4 5))
+        ((1) (2 3 4 5)))
+  )
+  (test-equal? "run 2 appendo x '() '(1 2 3)"
+    (run 2 (x) (appendo x '() '(1 2 3)))
+      '((1 2 3))
+  )
+  (test-equal? "run 2 appendo '() y '(4 5 6)"
+    (run 2 (y) (appendo '() y '(4 5 6)))
+      '((4 5 6))
+  )
+  (test-equal? "run 2 appendo '(1 2) '(3 4) z"
+    (run 2 (z) (appendo '(1 2) '(3 4) z))
+      '((1 2 3 4))
+  )
+  (test-equal? "run 0 appendo '(1 2) '(3 4) z"
+    (run 0 (z) (appendo '(1 2) '(3 4) z))
+      '()
+  )
  ))
