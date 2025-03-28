@@ -17,6 +17,10 @@
   (fresh (d)
     (== (cons a d) p)))
 
+(define (cdro p d)
+  (fresh (a)
+    (== (cons a d) p)))
+
 (require (except-in rackunit fail))
 (require rackunit/text-ui)
 
@@ -79,5 +83,21 @@
   (test-equal? "caro p 1"
     (run* (p) (caro p 1))
       '((1 . _.0))
+  )
+  (test-equal? "cdro '(1 2 3) 8"
+    (run* (q) (cdro '(1 2 3) 8))
+      '()
+  )
+  (test-equal? "cdro '(1 2 3) '(2 3)"
+    (run* (q) (cdro '(1 2 3) '(2 3)))
+      '(_.0)
+  )
+  (test-equal? "cdro '(1 2 3) d"
+    (run* (d) (cdro '(1 2 3) d))
+      '((2 3))
+  )
+  (test-equal? "cdro p '(1)"
+    (run* (p) (cdro p '(1)))
+      '((_.0 1))
   )
  ))
