@@ -13,6 +13,10 @@
        (== `(,a . ,res) out)
        (appendo d s res)))))
 
+(define (caro p a)
+  (fresh (d)
+    (== (cons a d) p)))
+
 (require (except-in rackunit fail))
 (require rackunit/text-ui)
 
@@ -59,5 +63,21 @@
   (test-equal? "run 0 appendo '(1 2) '(3 4) z"
     (run 0 (z) (appendo '(1 2) '(3 4) z))
       '()
+  )
+  (test-equal? "caro '(1 2 3) 8"
+    (run* (q) (caro '(1 2 3) 8))
+      '()
+  )
+  (test-equal? "caro '(1 2 3) 1"
+    (run* (q) (caro '(1 2 3) 1))
+      '(_.0)
+  )
+  (test-equal? "caro '(1 2 3) a"
+    (run* (a) (caro '(1 2 3) a))
+      '(1)
+  )
+  (test-equal? "caro p 1"
+    (run* (p) (caro p 1))
+      '((1 . _.0))
   )
  ))
