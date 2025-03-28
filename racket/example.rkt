@@ -13,6 +13,9 @@
        (== `(,a . ,res) out)
        (appendo d s res)))))
 
+(define (nullo x)
+  (== x '()))
+
 (define (caro p a)
   (fresh (d)
     (== (cons a d) p)))
@@ -66,6 +69,18 @@
   )
   (test-equal? "run 0 appendo '(1 2) '(3 4) z"
     (run 0 (z) (appendo '(1 2) '(3 4) z))
+      '()
+  )
+  (test-equal? "nullo '()"
+    (run* (q) (nullo '()))
+      '(_.0)
+  )
+  (test-equal? "nullo q"
+    (run* (q) (nullo q))
+      '(())
+  )
+  (test-equal? "nullo '(1)"
+    (run* (q) (nullo '(1)))
       '()
   )
   (test-equal? "caro '(1 2 3) 8"
